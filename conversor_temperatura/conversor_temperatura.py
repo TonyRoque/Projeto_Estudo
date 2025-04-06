@@ -1,6 +1,5 @@
- # conversor_temperatura.py
+#função de conversão
 
-# Funções de conversão
 def celsius_para_fahrenheit(c):
     return (c * 9/5) + 32
 
@@ -10,41 +9,68 @@ def fahrenheit_para_celsius(f):
 def celsius_para_kelvin(c):
     return c + 273.15
 
-# Função principal com menu
+def kelvin_para_celsius(k):
+    return k - 273.15
+
+def fahrenheit_para_kelvin(f):
+    return celsius_para_kelvin(fahrenheit_para_celsius(f))
+
+def kelvin_para_fahrenheit(k):
+    return celsius_para_fahrenheit(kelvin_para_celsius(k))
+
+#função de conversão de temperatura e entrada para maiscula.
+
+def converter_temperatura(valor, de_unidade, para_unidade):
+    de_unidade = de_unidade.upper()
+    para_unidade = para_unidade.upper()
+
+    if de_unidade == para_unidade:
+        return valor
+
+#condicional para decisão da formula.
+
+    if de_unidade == 'C':
+        if para_unidade == 'F':
+            return celsius_para_fahrenheit(valor)
+        elif para_unidade == 'K':
+            return celsius_para_kelvin(valor)
+    elif de_unidade == 'F':
+        if para_unidade == 'C':
+            return fahrenheit_para_celsius(valor)
+        elif para_unidade == 'K':
+            return fahrenheit_para_kelvin(valor)
+    elif de_unidade == 'K':
+        if para_unidade == 'C':
+            return kelvin_para_celsius(valor)
+        elif para_unidade == 'F':
+            return kelvin_para_fahrenheit(valor)
+
+    return "Erro: Conversão inválida!"
+
+# Parte principal do codigo, interação com o usuario.
+
 def main():
-    while True:
-        print("\n=== Conversor de Temperatura ===")
-        print("1. Celsius para Fahrenheit")
-        print("2. Fahrenheit para Celsius")
-        print("3. Celsius para Kelvin")
-        print("0. Sair")
+    print("=== Conversor Inteligente de Temperatura ===")
+    print("Unidades disponíveis: C (Celsius), F (Fahrenheit), K (Kelvin)")
 
-        opcao = input("Escolha uma opção (1/2/3/0): ")
+    de_unidade = input("Digite a unidade de entrada (C/F/K): ").strip().upper()
+    para_unidade = input("Digite a unidade de saída (C/F/K): ").strip().upper()
 
-        if opcao == '0':
-            print("Encerrando o conversor. Até mais!")
-            break
+    try:
+        valor = float(input("Digite o valor da temperatura: "))
+    except ValueError:
+        print("Erro: valor inválido!")
+        return
 
-        # Validação de entrada
-        try:
-            temp = float(input("Digite a temperatura: "))
-        except ValueError:
-            print("Erro: digite um número válido.")
-            continue
+    resultado = converter_temperatura(valor, de_unidade, para_unidade)
 
-        # Processamento da escolha
-        if opcao == '1':
-            resultado = celsius_para_fahrenheit(temp)
-            print(f"{temp}°C = {resultado:.2f}°F")
-        elif opcao == '2':
-            resultado = fahrenheit_para_celsius(temp)
-            print(f"{temp}°F = {resultado:.2f}°C")
-        elif opcao == '3':
-            resultado = celsius_para_kelvin(temp)
-            print(f"{temp}°C = {resultado:.2f}K")
-        else:
-            print("Opção inválida.")
+    if isinstance(resultado, str):
+        print(resultado)
+    else:
+        print(f"Resultado: {valor}°{de_unidade} = {round(resultado, 2)}°{para_unidade}")
+
 
 if __name__ == "__main__":
     main()
 
+ 
