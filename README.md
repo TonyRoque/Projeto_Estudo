@@ -16,13 +16,16 @@ Cada projeto representa um passo na minha jornada de evolução.
 | Nº | Projeto                         | Status |
 |----|----------------------------------|--------|
 | 1  | [Calculadora Simples](./calculadora) | ✅ Concluído |
+| 2  | [Conversor Temperatura](./conversor_temperatura) | ✅ Concluído | >> V2
+
 
 ---
 
 ## 🔜 Em breve...
 
-- Projeto 2: ...
+- Conversor Temperatura: ...
 - Projeto 3: ...
+- Projeto 4: ...
 - Até o projeto 60! 🏁
 
 ---
